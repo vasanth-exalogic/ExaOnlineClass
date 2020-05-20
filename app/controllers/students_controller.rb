@@ -35,7 +35,9 @@ class StudentsController < ApplicationController
 
   def show
     @student_batch = StudentBatch.find_by(user_id: params[:id])
-    @batch = Batch.find(@student_batch.batch_id)
+    unless @student_batch.nil?
+      @batch = Batch.find(@student_batch.batch_id)
+    end
   end
 
   def destroy

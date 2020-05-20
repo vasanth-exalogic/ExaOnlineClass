@@ -32,5 +32,15 @@ Rails.application.routes.draw do
   post '/students/:id/assign' => 'student_batches#create', as: 'student_batches'
   get '/students/:id/change/class' => 'student_batches#edit', as: 'change_student'
   patch '/students/:id/change/class' => 'student_batches#update', as: 'student_batch'
+
+  resources :lectures, only: [:index, :show]
+
+  get '/chapters/:id/new' => 'chapter#new', as: 'new_chapter'
+  post '/chapters/:id/new' => 'chapter#create', as: 'chapters'
+  resources :chapter, except: [:new,:create]
+
+  get '/chapters/:id/add/video' => 'video#new', as: 'new_video'
+  post '/chapters/:id/add/video' => 'video#create', as: 'videos'
+  resources :video, except: [:new,:create]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

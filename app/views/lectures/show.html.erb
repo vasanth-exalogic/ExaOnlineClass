@@ -1,0 +1,32 @@
+<br>
+<table>
+  <tr>
+    <td>Class</td>
+    <td><%= @batch.name %></td>
+  </tr>
+  <tr>
+    <td>Subject</td>
+    <td><%= @subject.subject %></td>
+  </tr>
+  <tr>
+    <td>Staff</td>
+    <td><%= @teacher.fname %> <%= @teacher.lname %></td>
+  </tr>
+</table>
+<br>
+<% unless current_user.has_role?(:student) %>
+  <%= link_to "New Chapter", new_chapter_path %>
+  <br><br>
+<% end %>
+<% i=1 %>
+Chapters List :
+<br><br>
+<table>
+  <% @chapters.each do |c| %>
+  <tr>
+    <td><%= i %><% i+=1 %></td>
+    <td><%= c.title %></td>
+    <td><%= link_to 'Show', chapter_path(c) %></td>
+  </tr>
+  <% end%>
+</table>

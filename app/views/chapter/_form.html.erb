@@ -1,0 +1,15 @@
+<%= form_for @chapter do |f| %>
+  <table>
+    <tr>
+      <td><%= f.label :title %></td>
+      <td><%= f.text_field :title %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :overview %></td>
+      <td><%= f.text_area :overview %></td>
+    </tr>
+    <tr>
+      <td><%= f.submit %></td>
+    </tr>
+  </table>
+<% end %>

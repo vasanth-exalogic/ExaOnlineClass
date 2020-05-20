@@ -1,0 +1,36 @@
+<br>
+<table>
+  <tr>
+    <td>Class</td>
+    <td><%= @batch.name %></td>
+  </tr>
+  <tr>
+    <td>Subject</td>
+    <td><%= @subject.subject %></td>
+  </tr>
+  <tr>
+    <td>Staff</td>
+    <td><%= @teacher.fname %> <%= @teacher.lname %></td>
+  </tr>
+  <tr>
+    <td>Title</td>
+    <td><%= @chapter.title %></td>
+  </tr>
+  <tr>
+    <td>Overview</td>
+    <td><%= @chapter.overview %></td>
+  </tr>
+</table>
+<br>
+<% if current_user.has_role?(:staff) %>
+  <%= link_to 'Add Video Lecture', new_video_path(@chapter) %>
+<% end %>
+<br><br>
+<table>
+  <% @videos.each do |v| %>
+  <tr>
+    <td><%= v.title %></td>
+    <td><%= link_to 'Show', video_path(v) %></td>
+  </tr>
+  <% end %>
+</table>

@@ -1,0 +1,45 @@
+<br>
+<% if current_user.has_role? :staff %>
+  Staff : <%= current_user.fname %> <%= current_user.lname %>
+  <br><br>
+  Class List :
+  <br><br>
+  <% i=1 %>
+  <table>
+    <% @teacher_batch_subject.each do |t| %>
+      <% batch_subject = BatchSubject.find(t.batch_subject_id) %>
+      <% batch = Batch.find(batch_subject.batch_id) %>
+      <% sub = Subject.find(batch_subject.subject_id) %>
+      <tr>
+        <td><%= i %><% i+=1 %></td>
+        <td><%= batch.name %></td>
+        <td><%= sub.subject %></td>
+        <td><%= link_to 'Select Class', lecture_path(batch_subject) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+<% if current_user.has_role? :student %>
+<table>
+  <tr>
+    <td>Student</td><td><%= current_user.fname %> <%= current_user.lname %></td>
+  </tr>
+  <tr>
+    <td>Class</td><td><%= @batch.name %></td>
+  </tr>
+</table>
+<br><br>
+Subject List :
+<br><br>
+<% i=1 %>
+<table>
+  <% @batch_subject.each do |b| %>
+  <% sub = Subject.find(b.subject_id) %>
+  <tr>
+    <td><%= i %><% i+=1 %></td>
+    <td><%= sub.subject %></td>
+    <td><%= link_to 'Select Class', lecture_path(b) %></td>
+  </tr>
+  <% end %>
+</table>
+<% end %>

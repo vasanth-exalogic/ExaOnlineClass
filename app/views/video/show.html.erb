@@ -1,0 +1,29 @@
+<br>
+<table>
+  <tr>
+    <td>Class</td>
+    <td><%= @batch.name %></td>
+  </tr>
+  <tr>
+    <td>Subject</td>
+    <td><%= @subject.subject %></td>
+  </tr>
+  <tr>
+    <td>Staff</td>
+    <td><%= @teacher.fname %> <%= @teacher.lname %></td>
+  </tr>
+  <tr>
+    <td>Chapter</td>
+    <td><%= @chapter.title %></td>
+  </tr>
+  <tr>
+    <td>Overview</td>
+    <td><%= @chapter.overview %></td>
+  </tr>
+  <tr>
+    <td>Title</td>
+    <td><%= @video.title %></td>
+  </tr>
+</table>
+<br>
+<video controls width="640" height="480" src="<%= @video.file %>"></video>

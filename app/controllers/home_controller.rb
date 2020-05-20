@@ -25,7 +25,7 @@ class HomeController < ApplicationController
     @classes_list = {-1=>'LKG',0=>'UKG',1=>'I',2=>'II',3=>'III',4=>'IV',5=>'V',
       6=>'VI',7=>'VII',8=>'VIII',9=>'IX',10=>'X',11=>'XI',12=>'XII'}
     @student_batch = StudentBatch.all.where(batch_id: @batch)
-    @teacher_batch_subjects
+    @batch_subjects = BatchSubject.all.where(batch_id: params[:id])
   end
 
 end

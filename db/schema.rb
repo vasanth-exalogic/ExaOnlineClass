@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_172637) do
+ActiveRecord::Schema.define(version: 2020_05_20_033603) do
 
   create_table "batch_subjects", force: :cascade do |t|
     t.integer "batch_id"
@@ -27,6 +27,21 @@ ActiveRecord::Schema.define(version: 2020_05_19_172637) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.index ["batch", "section"], name: "index_batches_on_batch_and_section", unique: true
+  end
+
+  create_table "chapter_videos", force: :cascade do |t|
+    t.integer "chapter_id"
+    t.integer "video_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "chapters", force: :cascade do |t|
+    t.integer "batch_subject_id"
+    t.string "title"
+    t.text "overview"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -91,6 +106,14 @@ ActiveRecord::Schema.define(version: 2020_05_19_172637) do
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string "title"
+    t.string "file"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "chapter_id"
   end
 
 end
