@@ -1,3 +1,14 @@
 <br><br>
 <%= link_to 'Add Class', new_batch_path%>
 <br><br>
+<table>
+  <% @batches.each do |b| %>
+    <tr>
+      <td><%= @classes_list[b.batch] %></td>
+      <td style="text-transform:uppercase"><%= b.section %></td>
+      <td><%= link_to 'Subjects', batch_path(b)%></td>
+      <td><%= link_to 'Edit', edit_batch_path(b) %></td>
+      <td><%= link_to 'Delete', batch_path(b), method: :delete, data: {confirm: 'Are you sure you want to delete the class?'} %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,21 @@
+<table>
+  <tr>
+    <td>Class</td>
+    <td><%= @classes_list[@batch.batch] %> <%= @batch.section.upcase %></td>
+  </tr><tr>
+    <td>Subject</td>
+    <td><%= @subject.subject %></td>
+  </tr>
+</table>
+<br>
+<%= form_for @teacher_batch_subject do |f| %>
+    <div class="field">
+      <%= f.label :staff %><br>
+      <%= f.select :user_id, @users, {:prompt => "Select a Staff"} %>
+    </div>
+<div class="actions">
+    <%= f.submit "Change" %>
+  </div>
+<% end %>
+<br>
+<%= link_to 'Remove Staff', destroy_teacher_batch_subject_path(@teacher_batch_subject), method: :delete, data: {confirm: "Are you sure?"} %>

@@ -1,0 +1,12 @@
+Class : <%= @classes_list[@batch.batch] %> <%= @batch.section.upcase %>
+<br><br>
+<%= form_for @batch_subject do |f| %>
+  <div class="field">
+    <%= f.label :subject %><br />
+    <%= f.collection_select :subject_id, Subject.all, :id, :subject%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

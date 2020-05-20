@@ -1,0 +1,52 @@
+Student Details
+<br><br>
+<table>
+  <tr>
+    <td>First Name</td>
+    <td><%= @student.fname %></td>
+  </tr>
+  <tr>
+    <td>Last Name</td>
+    <td><%= @student.lname %></td>
+  </tr>
+  <tr>
+    <td>Gender</td>
+    <td><%= @student.gender %></td>
+  </tr>
+  <tr>
+    <td>Contact</td>
+    <td><%= @student.contact %></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><%= @student.email %></td>
+  </tr>
+  <% if current_user.has_role? :admin or current_user.id==@student.id %>
+    <tr>
+      <td>Address</td>
+      <td><%= @student.address %></td>
+    </tr>
+  <% end %>
+  <% if @student_batch %>
+    <tr>
+      <td>Class</td>
+      <td><%= @batch.name %></td>
+    </tr>
+    <tr>
+      <td><%= link_to 'Change class', change_student_path(@student_batch) %></td>
+    </tr>
+  <% else %>
+    <tr>
+      <td><%= link_to 'Assign to a class', assign_student_path(@student) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <% if current_user.has_role? :admin or (current_user.has_role? :student and current_user.id==@student.id) %>
+      <td><%= link_to 'Edit', edit_staff_path(@student) %></td>
+    <% end %>
+    <% if current_user.has_role? :admin %>
+      <td><%= link_to 'Delete', staff_path(@student), method: :delete, data: {confirm: "Are you sure you want to delete this student details?"} %></td>
+    <% end %>
+  </tr>
+</table>
+<br>

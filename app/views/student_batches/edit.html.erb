@@ -1,0 +1,12 @@
+Student : <%= @student.fname %> <%= @student.lname %>
+<br><br>
+<%= form_for @student_batch do |f| %>
+  <div class="field">
+    <%= f.label :batch %><br />
+    <%= f.select :batch_id, Batch.order('batch').pluck('name','id') %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Change"%>
+  </div>
+<% end %>

@@ -1,0 +1,24 @@
+Staff Details
+<br><br>
+<% if current_user.has_role? :admin %>
+  <%= link_to 'Add Staff', new_staff_path %>
+  <br><br>
+<% end %>
+<table>
+  <% i=1 %>
+  <% @staffs.each do |s| %>
+    <tr>
+      <td><%= i %><% i+=1 %></td>
+      <td><%= s.fname %></td>
+      <td><%= s.lname %></td>
+      <td><%= s.contact %></td>
+      <td><%= link_to 'Show', staff_path(s) %></td>
+      <% if current_user.has_role? :admin or (current_user.has_role? :staff and current_user.id==s.id) %>
+        <td><%= link_to 'Edit', edit_staff_path(s) %></td>
+      <% end %>
+      <% if current_user.has_role? :admin %>
+        <td><%= link_to 'Delete', staff_path(s), method: :delete, data: {confirm: "Are you sure you want to delete this staff details?"} %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_033541) do
+ActiveRecord::Schema.define(version: 2020_05_19_172637) do
+
+  create_table "batch_subjects", force: :cascade do |t|
+    t.integer "batch_id"
+    t.integer "subject_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["batch_id", "subject_id"], name: "index_batch_subjects_on_batch_id_and_subject_id", unique: true
+  end
 
   create_table "batches", force: :cascade do |t|
     t.integer "batch"
     t.string "section"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.index ["batch", "section"], name: "index_batches_on_batch_and_section", unique: true
   end
 
   create_table "roles", force: :cascade do |t|
@@ -28,6 +38,34 @@ ActiveRecord::Schema.define(version: 2020_05_19_033541) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "student_batches", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "batch_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "subject"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "teacher_batch_subjects", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "batch_subject_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "teacher_subjects", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "subject_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "subject_id"], name: "index_teacher_subjects_on_user_id_and_subject_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

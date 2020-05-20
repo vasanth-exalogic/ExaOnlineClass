@@ -1,0 +1,37 @@
+Class : <%= @classes_list[@batch.batch] %> <%= @batch.section.upcase %>
+<br><br>
+<%= link_to "Assign Subjects", assign_subjects_path(@batch) %>
+<br><br>
+<table>
+  <% i=1 %>
+  <tr>
+    <td>Si.No</td>
+    <td>Subject</td>
+    <td>Staff</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <% @batch_subjects.each do |b| %>
+    <% teacher_batch_subject = TeacherBatchSubject.find_by(batch_subject_id: b) %>
+    <% if teacher_batch_subject%>
+      <% teacher = User.find(teacher_batch_subject.user_id) %>
+    <% end %>
+    <tr>
+      <td><%= i %><% i+=1 %></td>
+      <td><% s = Subject.find(b.subject_id) %><%= s.subject %></td>
+      <td>
+        <% if teacher_batch_subject%>
+          <%= teacher.fname %>
+        <% end %>
+      </td>
+      <td>
+        <% if teacher_batch_subject%>
+          <%= link_to 'Change Staff', change_staff_path(b) %>
+        <% else %>
+          <%= link_to 'Assign Staff', assign_staff_path(b) %>
+        <% end %>
+      </td>
+      <td><%= link_to 'Delete', delete_batch_subject_path(id: @batch, sub_id: b.subject_id), method: :delete, data: {confirm: "Are you sure you want to delete?"} %></td>
+    </tr>
+  <% end %>
+</table>

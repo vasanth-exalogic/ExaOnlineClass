@@ -1,0 +1,12 @@
+Staff : <%= @user.fname %> <%= @user.lname %>
+<br><br>
+<%= form_for @teacher_subject do |f| %>
+  <div class="field">
+    <%= f.label :subject %><br />
+    <%= f.collection_select :subject_id, Subject.all, :id, :subject %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

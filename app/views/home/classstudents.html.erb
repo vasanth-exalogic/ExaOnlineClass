@@ -1,0 +1,24 @@
+
+<table>
+  <tr>
+    <td>Class</td>
+    <td><%= @classes_list[@batch.batch] %> <%= @batch.section.upcase %></td>
+  </tr>
+  <tr>
+    <td>Students Count</td>
+    <td><%= @student_batch.count %></td>
+  </tr>
+</table>
+<br>
+Students List:
+<br><br>
+<% i=1 %>
+<table>
+  <% @student_batch.each do |s| %>
+    <% student = User.find(s.user_id)%>
+    <tr>
+      <td><%= i %><% i+=1 %></td>
+      <td><%= student.fname %> <%= student.lname %></td>
+    </tr>
+  <% end %>
+</table>

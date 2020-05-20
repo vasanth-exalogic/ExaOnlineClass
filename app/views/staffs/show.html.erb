@@ -1,0 +1,73 @@
+Staff Details
+<br><br>
+<table>
+  <tr>
+    <td>First Name</td>
+    <td><%= @staff.fname %></td>
+  </tr>
+  <tr>
+    <td>Last Name</td>
+    <td><%= @staff.lname %></td>
+  </tr>
+  <tr>
+    <td>Gender</td>
+    <td><%= @staff.gender %></td>
+  </tr>
+  <tr>
+    <td>Contact</td>
+    <td><%= @staff.contact %></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><%= @staff.email %></td>
+  </tr>
+  <% if current_user.has_role? :admin or current_user.id==@staff.id %>
+  <tr>
+    <td>Address</td>
+    <td><%= @staff.address %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <% if current_user.has_role? :admin or (current_user.has_role? :staff and current_user.id==@staff.id) %>
+      <td><%= link_to 'Edit', edit_staff_path(@staff) %></td>
+    <% end %>
+    <% if current_user.has_role? :admin %>
+      <td><%= link_to 'Delete', staff_path(@staff), method: :delete, data: {confirm: "Are you sure you want to delete this staff details?"} %></td>
+    <% end %>
+  </tr>
+</table>
+<br>
+<% if current_user.has_role? :admin %>
+  <td><%= link_to 'Assign Subject', assign_subject_path %></td>
+<% end %>
+<br><br>
+<% if @teacher_batch_subjects.count>0 %>
+  Assigned Classes
+  <br><br>
+  <table>
+    <% @teacher_batch_subjects.each do |t| %>
+    <% batch_subject = BatchSubject.find(t.batch_subject_id)%>
+    <% batch = Batch.find(batch_subject.batch_id)%>
+    <% subject = Subject.find(batch_subject.subject_id)%>
+    <tr>
+      <td><%= @classes_list[batch.batch] %> <%= batch.section.upcase %></td>
+      <td><%= subject.subject %></td>
+    </tr>
+    <% end %>
+</table>
+<% else %>
+  Assigned Subjects
+  <br><br>
+  <% i=1 %>
+  <table>
+    <% @teacher_subjects.each do |s| %>
+      <% subject = Subject.find(s.subject_id) %>
+      <tr>
+        <td><%= i %><% i+=1 %></td>
+        <td><%= subject.subject %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<br><br>

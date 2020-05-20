@@ -1,0 +1,12 @@
+Subject : <%= @subject.subject %>
+<br><br>
+<table>
+  <% i=1 %>
+  <% @batches.each do |b| %>
+    <tr>
+      <td><%= i %><% i+=1 %></td>
+      <td><% b = Batch.find(b.batch_id) %><%= @classes_list[b.batch] %> <%= b.section.upcase %></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>

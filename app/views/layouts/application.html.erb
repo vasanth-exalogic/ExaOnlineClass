@@ -8,9 +8,16 @@
     <p class="alert"><%= alert %></p>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style media="screen">
+      table,td{
+        min-width:150px;
+      }
+    </style>
   </head>
 
   <body>
     <%= yield %>
+    <br><br>
+    <%= link_to 'Home', root_path %>
   </body>
 </html>

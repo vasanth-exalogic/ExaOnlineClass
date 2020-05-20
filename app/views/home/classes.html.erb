@@ -1,0 +1,15 @@
+Classes List :
+<br><br>
+<% i=1 %>
+<table>
+  <% @batches.each do |b| %>
+    <tr>
+      <td><%= i %><% i+=1 %></td>
+      <td>
+        <a href="/academy/class/<%= b.id %>">
+          <%= @classes_list[b.batch] %> <%= b.section.upcase %><br>
+        </a>
+      </td>
+    </tr>
+  <% end %>
+</table>

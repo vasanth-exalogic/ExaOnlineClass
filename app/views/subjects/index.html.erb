@@ -1,0 +1,13 @@
+<br><br>
+<%= link_to 'Add Subject', new_subject_path%>
+<br><br>
+<table>
+  <% @subjects.each do |s| %>
+    <tr>
+      <td style="text-transform:uppercase"><%= s.subject %></td>
+      <td><%= link_to 'Classes', subject_path(s)%></td>
+      <td><%= link_to 'Edit', edit_subject_path(s) %></td>
+      <td><%= link_to 'Delete', subject_path(s), method: :delete, data: {confirm: 'Are you sure you want to delete the subject?'} %></td>
+    </tr>
+  <% end %>
+</table>

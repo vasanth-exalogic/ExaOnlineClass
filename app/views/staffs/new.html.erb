@@ -1,0 +1,43 @@
+Add Staff
+<br><br>
+<%= form_for(@staff, url: staffs_path) do |f| %>
+  <table>
+    <tr>
+      <td><%= f.label "First Name" %></td>
+      <td><%= f.text_field :fname %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Last Name" %></td>
+      <td><%= f.text_field :lname %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :gender %></td>
+      <td><%= f.select :gender, [['Gender',nil],'Male','Female','Others'] %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :contact %></td>
+      <td><%= f.number_field :contact %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :address %></td>
+      <td><%= f.text_area :address %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :email %></td>
+      <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :password %><% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br /></td>
+      <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :password_confirmation %></td>
+      <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+    </tr>
+    <tr>
+      <td><%= f.submit %></td>
+    </tr>
+  </table>
+<% end %>
